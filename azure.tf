@@ -92,4 +92,12 @@ resource "azurerm_linux_virtual_machine" "myVM" {
   }
 }
 
+output "azure_vm_public_ip" {
+  description = "Public IP address of the Azure VM"
+  value       = azurerm_public_ip.myPublicIP.ip_address
+}
 
+output "azure_ssh_command" {
+  description = "SSH command to connect to Azure VM"
+  value       = "ssh ${azurerm_linux_virtual_machine.myVM.admin_username}@${azurerm_public_ip.myPublicIP.ip_address}"
+}
